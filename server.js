@@ -11,7 +11,7 @@ const User = require('./models/User');
 const app = express();
 // app.use(cors());
 
-const allowedOrigins = ['http://localhost:5173', 'https://crm-frontend-ls2x.onrender.com'];
+const allowedOrigins = ['http://localhost:5173', 'https://crm-fr.onrender.com'];
 
 app.use(cors({
   origin: allowedOrigins,
