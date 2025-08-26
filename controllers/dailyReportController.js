@@ -4,7 +4,7 @@ const Employee = require("../models/Employee");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 // const VERIFIED_TEST_EMAIL = 'backend.9developer@gmail.com'; // Your verified Resend email
-const VERIFIED_TEST_EMAIL = 'meneiljohnson@gmail.com'
+const VERIFIED_TEST_EMAIL = 'krishnaprasad24795@gmail.com'
 
 
 exports.sendDailyReport = async (req, res) => {
