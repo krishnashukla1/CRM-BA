@@ -88,6 +88,7 @@ app.get('/api/user/profile', protect, async (req, res) => {
 app.get('/test-image', (req, res) => {
   res.sendFile(path.join(__dirname, 'uploads', 'employee_1752784256852.jpeg'));
 });
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
