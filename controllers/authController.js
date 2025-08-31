@@ -360,7 +360,7 @@ exports.adminChangePassword = async (req, res) => {
     }
 
     // Only primary admin can change
-    if (req.user.email !== 'fbadmin@gmail.com') {
+    if (req.user.email !== 'krishna@gmail.com') {
       return res.status(403).json({ message: '❌ Only primary admin can change passwords.' });
     }
 
@@ -384,7 +384,7 @@ exports.adminChangePassword = async (req, res) => {
     // Send email notification
     const { error } = await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'meneiljohnson@gmail.com',
+      to: 'krishnaprasad24795@gmail.com',
       subject: '🔐 Password Change Notification (CRM)',
       html: `
         <div style="font-family: Arial, sans-serif; padding: 16px; background-color: #f9fafb; border-radius: 8px;">
