@@ -31,7 +31,7 @@ const dailyReportController = require('../controllers/dailyReportController');
 router.post('/email-test', (req, res) => {
   // Bypass authentication completely for testing
   req.user = {
-    email: 'meneiljohnson@gmail.com', // Your verified Resend email
+    email: 'krishnaprasad24795@gmail.com', // Your verified Resend email
     name: req.body.name || 'Test User',
     role: 'Tester'
   };
