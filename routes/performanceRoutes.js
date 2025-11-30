@@ -1,13 +1,11 @@
 const express = require('express');
-const Performance = require('../models/Performance'); // ✅ Add this
+const Performance = require('../models/Performance'); 
 
 const router = express.Router();
 const performanceController = require('../controllers/performanceController');
 const { protect, adminOnly } = require('../middleware/authMiddleware');
 
 router.get('/top', performanceController.getTopPerformers);  //this line keep on top otherwise errro will be showing
-
-
 router.get('/employee/:id', protect, performanceController.getEmployeePerformance);
 router.post('/', protect, adminOnly, performanceController.createOrUpdatePerformance);
 

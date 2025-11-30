@@ -50,8 +50,6 @@ app.use('/api/uploads/tasks', express.static(path.join(__dirname, 'uploads/tasks
 
 
 
-
-
 // ✅ Use Routes
 app.use("/api/employees", employeeRoutes);
 app.use("/api/tasks", taskRoutes);

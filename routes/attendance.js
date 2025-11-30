@@ -6,10 +6,7 @@ const { authenticateUser } = require('../middleware/authMiddleware');
 const {protect} = require('../middleware/authMiddleware');
 const attendanceController = require('../controllers/attendanceController'); // ✅ import controller properly
 
-// router.get('/today', authenticateUser, attendanceController.checkTodayAttendance); // ✅ secure route properly
 router.get('/today', protect, attendanceController.checkTodayAttendance); // ✅ secure route properly
-
-
 
 router.post('/mark', attendanceController.markAttendance);
 router.post('/', attendanceController.addAttendance);

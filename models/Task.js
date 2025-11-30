@@ -12,11 +12,10 @@ const taskSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   dueDate: { type: Date },
   priority: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
-    attachment: { type: String, default: null }, // ✅ Added field
-
+  attachment: { type: String, default: null }, // ✅ Added field
 
 },
- { timestamps: true });
+  { timestamps: true });
 
 // ✅ Useful indexes for filtering tasks
 taskSchema.index({ assignedTo: 1, status: 1 });

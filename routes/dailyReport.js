@@ -1,25 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-// const { authenticateUser } = require('../middleware/authMiddleware'); // Using your existing middleware
-// const dailyReportController = require('../controllers/dailyReportController');
-
-// // Unprotected test endpoint
-// router.post('/email-test', (req, res, next) => {
-//   // Bypass auth for testing
-//   req.user = { 
-//     email: req.body.email || 'test@example.com',
-//     role: 'tester'
-//   };
-//   dailyReportController.sendDailyReport(req, res, next);
-// });
-
-// // Protected production endpoint
-// router.post('/email', authenticateUser, dailyReportController.sendDailyReport);
-
-// module.exports = router;
-
-//===================
-
 const express = require('express');
 const router = express.Router();
 const { authenticateUser } = require('../middleware/authMiddleware');

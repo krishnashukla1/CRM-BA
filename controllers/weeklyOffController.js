@@ -1,7 +1,5 @@
 const WeeklyOff = require('../models/weeklyOff');
 
-
-
 // GET all weekly offs
 exports.getAllWeeklyOffs = async (req, res) => {
   try {
@@ -25,17 +23,6 @@ exports.getWeeklyOffsByEmployee = async (req, res) => {
 };
 
 // POST create new weekly off
-// exports.createWeeklyOff = async (req, res) => {
-//   const { employeeId, dayOfWeek, reason } = req.body;
-//   try {
-//     const created = await WeeklyOff.create({ employeeId, dayOfWeek, reason });
-//     res.status(201).json(created);
-//   } catch (err) {
-//     res.status(500).json({ message: 'Error creating weekly off' });
-//   }
-// };
-
-
 exports.createWeeklyOff = async (req, res) => {
   const { employeeId, date, reason } = req.body;
   try {
@@ -65,19 +52,9 @@ exports.createWeeklyOff = async (req, res) => {
 //   }
 // };
 
-// DELETE weekly off by employeeId
-// exports.deleteWeeklyOffByEmployeeId = async (req, res) => {
-//   const { employeeId } = req.params;
-//   try {
-//     const deleted = await WeeklyOff.findOneAndDelete({ employeeId });
-//     if (!deleted) return res.status(404).json({ message: 'Weekly off not found' });
-//     res.json({ message: 'Weekly off deleted' });
-//   } catch (err) {
-//     res.status(500).json({ message: 'Error deleting weekly off' });
-//   }
-// };
 
-// const mongoose = require('mongoose');
+
+// DELETE weekly off by employeeId
 
 exports.deleteWeeklyOffByEmployeeId = async (req, res) => {
   const { employeeId } = req.params;
@@ -97,10 +74,6 @@ exports.deleteWeeklyOffByEmployeeId = async (req, res) => {
     res.status(500).json({ message: 'Server error deleting weekly off', error: err.message });
   }
 };
-
-
-
-
 
 exports.deleteWeeklyOffById = async (req, res) => {
   const { id } = req.params;

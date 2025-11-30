@@ -8,7 +8,7 @@ const {
   addEmployee,
   upload,
   uploadEmployeePhoto,getSalaryByMonth,updateEmployee,deleteEmployee,updateLeaveQuota,
-  updateUsedDays,getEmployeeByUserId,getCurrentEmployee,getSupervisors
+  updateUsedDays,getEmployeeByUserId,getCurrentEmployee,
 } = require("../controllers/employeeController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -50,7 +50,7 @@ router.patch('/:id/leave-quota', updateLeaveQuota);
 router.patch("/:id/used-days", updateUsedDays);
 router.get("/by-user/:userId", getEmployeeByUserId);
 
-router.get("/supervisors", getSupervisors); // Add this route
+// router.get("/supervisors", getSupervisors); // Add this route
 
 module.exports = router;
 

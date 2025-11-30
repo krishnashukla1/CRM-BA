@@ -3,75 +3,6 @@ const mongoose = require('mongoose');
 const Performance = require('../models/Performance');
 const Employee = require('../models/Employee');
 
-
-// exports.getEmployeePerformance = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { page = 1, limit = 10, groupByMonth } = req.query;
-
-//     const skip = (page - 1) * limit;
-
-//     const query = { employeeId: id };
-
-//     const performances = await Performance.find(query)
-//       .sort({ createdAt: -1 })
-//       .skip(Number(skip))
-//       .limit(Number(limit));
-
-//     const totalCount = await Performance.countDocuments(query);
-
-//     if (groupByMonth === 'true') {
-//       // 🛑 Check: is `performances` an array and not empty?
-//       const grouped = performances.reduce((acc, item) => {
-//         const month = item.month || 'Unknown';
-//         if (!acc[month]) {
-//           acc[month] = { totalSales: 0, totalTarget: 0 };
-//         }
-//         acc[month].totalSales += item.sales || 0;
-//         acc[month].totalTarget += item.target || 0;
-//         return acc;
-//       }, {});
-
-//       return res.status(200).json({
-//         status: 'success',
-//         message: 'Grouped performance data by month',
-//         data: grouped,
-//       });
-//     }
-
-//     const totalTarget = performances.reduce((acc, cur) => acc + cur.target, 0);
-//     const totalSales = performances.reduce((acc, cur) => acc + cur.sales, 0);
-//     const remaining = totalTarget - totalSales;
-//     const perDayGoal = totalTarget / 30;
-
-//     res.status(200).json({
-//       status: 'success',
-//       message: 'Performance data fetched successfully',
-//       data: performances,
-//       summary: {
-//         totalTarget,
-//         totalSales,
-//         remaining,
-//         perDayGoal: Math.round(perDayGoal),
-//       },
-//       pagination: {
-//         totalCount,
-//         totalPages: Math.ceil(totalCount / limit),
-//         currentPage: Number(page),
-//         perPage: Number(limit),
-//       },
-//     });
-//   } catch (error) {
-//     console.error('❌ Error in getEmployeePerformance:', error.message);
-//     res.status(500).json({
-//       status: 'error',
-//       message: 'Server Error: Cannot fetch performance',
-//       error: error.message,
-//     });
-//   }
-// };
-
-
 exports.getEmployeePerformance = async (req, res) => {
   try {
     const { id } = req.params;
@@ -137,11 +68,7 @@ exports.getEmployeePerformance = async (req, res) => {
   }
 };
 
-
-
-
 // ✅ POST: /api/performance (admin only)
-
 
 exports.createOrUpdatePerformance = async (req, res) => {
   try {
@@ -206,136 +133,6 @@ exports.createOrUpdatePerformance = async (req, res) => {
     });
   }
 };
-
-
-// exports.getTopPerformers = async (req, res) => {
-//   try {
-//     const topPerformers = await Performance.aggregate([
-//       {
-//         $addFields: {
-//           performance: { $multiply: [{ $divide: ["$sales", "$target"] }, 100] }
-//         }
-//       },
-//       {
-//         $sort: { performance: -1 }
-//       },
-//       {
-//         $group: {
-//           _id: "$employeeId", // group by employee
-//           bestPerformance: { $first: "$performance" },
-//           sales: { $first: "$sales" },
-//           target: { $first: "$target" },
-//           month: { $first: "$month" }
-//         }
-//       },
-//       { $sort: { bestPerformance: -1 } },
-//       { $limit: 10 },
-//       {
-//         $lookup: {
-//           from: "employees",
-//           localField: "_id",
-//           foreignField: "_id", // make sure employeeId is actual _id in employee
-//           as: "employee"
-//         }
-//       },
-//       { $unwind: "$employee" },
-//       {
-//         $project: {
-//           _id: 1,
-//           bestPerformance: 1,
-//           sales: 1,
-//           target: 1,
-//           month: 1,
-//           name: "$employee.name",
-//           photo: "$employee.photo"
-//         }
-//       }
-//     ]);
-
-//     if (topPerformers.length === 0) {
-//       return res.status(404).json({ message: "No top performers found" });
-//     }
-
-//     res.status(200).json({
-//       status: "success",
-//       message: "Top performers fetched successfully",
-//       data: topPerformers
-//     });
-//   } catch (error) {
-//     console.error("❌ Error in getTopPerformers:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
-
-// exports.getTopPerformers = async (req, res) => {
-//   try {
-//     const topPerformers = await Performance.aggregate([
-//       {
-//         $addFields: {
-//           performance: {
-//             $multiply: [
-//               { $cond: [{ $eq: ["$target", 0] }, 0, { $divide: ["$sales", "$target"] }] },
-//               100
-//             ]
-//           }
-//         }
-//       },
-//       {
-//         $sort: { performance: -1 }
-//       },
-//       {
-//         $group: {
-//           _id: "$employeeId",
-//           bestPerformance: { $max: "$performance" },
-//           sales: { $first: "$sales" },
-//           target: { $first: "$target" },
-//           month: { $first: "$month" }
-//         }
-//       },
-//       {
-//         $sort: { bestPerformance: -1 }
-//       },
-//       {
-//         $limit: 10
-//       },
-//       {
-//         $lookup: {
-//           from: "employees",
-//           localField: "_id",
-//           foreignField: "_id",
-//           as: "employee"
-//         }
-//       },
-//       { $unwind: "$employee" },
-//       {
-//         $project: {
-//           _id: 1,
-//           bestPerformance: { $round: ["$bestPerformance", 2] },
-//           sales: 1,
-//           target: 1,
-//           month: 1,
-//           name: "$employee.name",
-//           photo: "$employee.photo"
-//         }
-//       }
-//     ]);
-
-//     if (!topPerformers.length) {
-//       return res.status(404).json({ message: "No top performers found" });
-//     }
-
-//     res.status(200).json({
-//       status: "success",
-//       message: "Top performers fetched successfully",
-//       data: topPerformers
-//     });
-//   } catch (error) {
-//     console.error("❌ Error in getTopPerformers:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
-
-
 
 exports.getTopPerformers = async (req, res) => {
   try {
@@ -407,7 +204,6 @@ exports.getTopPerformers = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
 
 exports.getAllPerformance = async (req, res) => {
   try {

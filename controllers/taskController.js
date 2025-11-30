@@ -33,40 +33,6 @@ exports.getAllTasks = async (req, res) => {
   }
 };
 
-
-
-// exports.createTask = async (req, res) => {
-//   try {
-//     const newTask = new Task(req.body);
-//     await newTask.save();
-//     res.status(201).json(newTask);
-//   } catch (err) {
-//     res.status(400).json({ message: 'Failed to create task' });
-//   }
-// };
-
-
-// exports.createTask = async (req, res) => {
-//   try {
-//     const newTask = new Task(req.body);
-//     await newTask.save();
-
-//     // Use consistent response structure
-//     res.status(201).json({
-//       status: 'success',
-//       message: 'Task created successfully',
-//       data: newTask,
-//     });
-//   } catch (err) {
-//     res.status(400).json({
-//       status: 'error',
-//       message: 'Failed to create task',
-//       error: err.message,
-//     });
-//   }
-// };
-
-
 exports.createTask = async (req, res) => {
   try {
     const { title, description, status, assignedTo, dueDate, priority } = req.body;
@@ -97,7 +63,6 @@ exports.createTask = async (req, res) => {
   }
 };
 
-
 exports.updateTaskStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -108,7 +73,6 @@ exports.updateTaskStatus = async (req, res) => {
     res.status(400).json({ message: 'Failed to update task status' });
   }
 };
-
 // Update full task
 exports.updateTask = async (req, res) => {
   try {

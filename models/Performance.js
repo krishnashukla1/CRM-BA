@@ -10,5 +10,4 @@ const performanceSchema = new mongoose.Schema({
 // performanceSchema.index({ userId: 1, month: 1 }, { unique: true });
 performanceSchema.index({ employeeId: 1, month: 1 }, { unique: true });
 
-
 module.exports = mongoose.model('Performance', performanceSchema);

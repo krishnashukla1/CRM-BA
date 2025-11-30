@@ -8,19 +8,15 @@ const leaveSchema = new mongoose.Schema({
   reason: { type: String },
   document: { type: String }, // store filename
   leaveType: {
-  type: String,
-  enum: ['Paid Leave', 'Leave Without Pay'], // optional
-  default: 'Paid Leave',
-},
-isPaid: {
-  type: Boolean,
-  default: false, // means it's LWP by default
-},
-
-
+    type: String,
+    enum: ['Paid Leave', 'Leave Without Pay'], // optional
+    default: 'Paid Leave',
+  },
+  isPaid: {
+    type: Boolean,
+    default: false, // means it's LWP by default
+  },
   createdAt: { type: Date, default: Date.now }
-
-
 });
 
 // ✅ Indexes for fast filtering/sorting

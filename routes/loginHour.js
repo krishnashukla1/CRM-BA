@@ -7,10 +7,7 @@ router.post('/login', loginController.markLogin);
 router.post('/logout', loginController.markLogout);
 router.post('/break/start', loginController.startBreak);
 router.post('/break/end', loginController.endBreak);
-
 router.get('/today/:employeeId', loginController.getTodayStats);
-
-
 router.get('/all', loginController.getAllLoginHours);
 
 

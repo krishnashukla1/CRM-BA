@@ -1,36 +1,7 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
-
-// exports.protect = (req, res, next) => {
-//   const authHeader = req.headers.authorization;
-//    console.log('Auth header received:', authHeader); 
-
-//   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-//     return res.status(401).json({ message: 'Unauthorized: No token' });
-//   }
-
-//   const token = authHeader.split(" ")[1];
-// console.log('Token extracted:', token);
-//   try {
-//     const decoded = jwt.verify(token, JWT_SECRET);
-//       console.log('Decoded token:', decoded); 
-//     req.user = decoded;
-    
-//     next();
-//   } catch (err) {
-//       console.error('JWT verification failed:', err);
-//     return res.status(403).json({ message: 'Token invalid or expired' });
-//   }
-// };
-
-// Admin only access
-
-
-// middleware/authMiddleware.js
-
-
 const Employee = require('../models/Employee');
-const User = require('../models/User'); // Assuming you have a User model
+const User = require('../models/User'); 
 
 exports.protect = async (req, res, next) => {
   try {
@@ -134,7 +105,6 @@ exports.verifyToken = (req, res, next) => {
     return res.status(403).json({ message: 'Token invalid or expired' });
   }
 };
-
 // ✅ Middleware to allow only admin users
 exports.isAdmin = (req, res, next) => {
   if (!req.user || req.user.role !== 'admin') {
